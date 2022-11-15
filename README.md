@@ -19,63 +19,68 @@
 
 ![image](https://user-images.githubusercontent.com/113981423/201172126-9a05678c-70db-4747-8ef2-5e49523ee7b5.png)
 
-provider "aws" {
-    access_key = "..."
-    secret_key = "..."
-    region = "us-east-1"
-}
-
-resource "aws_instance" "my_ubuntu" {
-    ami = "ami-08c40ec9ead489470"
-    instance_type = "t2.micro"
-    vpc_security_group_ids = [aws_security_group.my_web_security_group.id]
-    key_name = "my_key"
-
-    tags = {
-        Name = "MyServer"
-        Owner = "Oliyarnik Serhiy"
-        Project = "Lab4"
-    }
-}
-
-resource "aws_security_group" "my_web_security_group" {
-    name = "Security group"
-    description = "allow http and https"
-
-    ingress {
-        from_port = 80
-        to_port = 80
-        protocol = "tcp"
-        cidr_blocks = ["0.0.0.0/0"]
+    provider "aws" {
+        access_key = "..."
+        secret_key = "..."
+        region = "us-east-1"
     }
 
-    ingress {
-        from_port = 443
-        to_port = 443
-        protocol = "tcp"
-        cidr_blocks = ["0.0.0.0/0"]
-    }
-
-    ingress{
-        from_port = 22
-        to_port = 22
-        protocol = "tcp"
-        cidr_blocks = ["0.0.0.0/0"]
-    }
-
-    egress {
-        from_port = 0
-        to_port = 0
-        protocol = "-1"
-        cidr_blocks = ["0.0.0.0/0"]
-    }
-
-}
-
-resource "aws_key_pair" "keys" {
+    resource "aws_instance" "my_ubuntu" {
+        ami = "ami-08c40ec9ead489470"
+        instance_type = "t2.micro"
+        vpc_security_group_ids = [aws_security_group.my_web_security_group.id]
         key_name = "my_key"
-        public_key = "ssh-rsa ..."
+
+        tags = {
+            Name = "MyServer"
+            Owner = "Oliyarnik Serhiy"
+            Project = "Lab4"
+        }
     }
+
+    resource "aws_security_group" "my_web_security_group" {
+        name = "Security group"
+        description = "allow http and https"
+
+        ingress {
+            from_port = 80
+            to_port = 80
+            protocol = "tcp"
+            cidr_blocks = ["0.0.0.0/0"]
+        }
+
+        ingress {
+            from_port = 443
+            to_port = 443
+            protocol = "tcp"
+            cidr_blocks = ["0.0.0.0/0"]
+        }
+
+        ingress{
+            from_port = 22
+            to_port = 22
+            protocol = "tcp"
+            cidr_blocks = ["0.0.0.0/0"]
+        }
+
+        egress {
+            from_port = 0
+            to_port = 0
+            protocol = "-1"
+            cidr_blocks = ["0.0.0.0/0"]
+        }
+
+    }
+
+    resource "aws_key_pair" "keys" {
+            key_name = "my_key"
+            public_key = "ssh-rsa ..."
+        }
+        
+terraform destroy
+        
+![image](https://user-images.githubusercontent.com/113981423/201979489-c8ef3043-ba92-4990-9c16-03e3943f3fab.png)
+
 
 Висновок: на даній лабораторній роботі я завдяки terraform зміг створити власний сервер
 
