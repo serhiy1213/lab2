@@ -81,6 +81,8 @@ terraform destroy
         
 ![image](https://user-images.githubusercontent.com/113981423/201979489-c8ef3043-ba92-4990-9c16-03e3943f3fab.png)
 
+![image](https://user-images.githubusercontent.com/113981423/201979780-dd46e6bc-5022-4f7e-acc5-fb53112a09b1.png)
+
 
 Висновок: на даній лабораторній роботі я завдяки terraform зміг створити власний сервер
 
